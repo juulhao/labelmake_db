@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RotuloController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/greeting', function () {
+    return 'Hello World';
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/rotulos', [RotuloController::class, 'getRotulos']);
 
 Route::get('/auth', [AuthController::class, 'getUser']);
