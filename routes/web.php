@@ -26,5 +26,6 @@ Route::get('/', function () {
 });
 
 Route::get('/rotulos', [RotuloController::class, 'getRotulos']);
+Route::get('/pdf', [RotuloController::class, 'getPDF']);
 
 Route::get('/auth', [AuthController::class, 'getUser']);
