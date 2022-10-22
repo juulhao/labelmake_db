@@ -48,10 +48,10 @@ class RotuloController extends Controller
         $parametros =     'KEY=' . $key .
             '&webBUSCA=imgREC&FILIAL_O=' . $filial .
             '&REQUI_NRO=' . $reqNro .
-            '&PEDIDO_NRO=' . 500527 .
+            '&PEDIDO_NRO=' . ltrim(rtrim($xmlConverted['RECNO1']['NRO_PEDIDO_MOBY'])) .
             '&SESS=afg1234567890';
-        '&PEDIDO_NRO=' . ltrim(rtrim($xmlConverted['RECNO1']['NRO_PEDIDO_MOBY']));
-        $xmlIMG = json_encode(simplexml_load_file('http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.php?' . $parametros));
+
+        $xmlIMG = json_encode(simplexml_load_file('http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v2.php?' . $parametros));
         $xmlIMGConverted = json_decode($xmlIMG, true);
         // dd($xmlIMGConverted);
         return response($xmlIMGConverted);
