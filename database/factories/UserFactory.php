@@ -18,8 +18,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'nome' => fake()->name(),
-            'cpf' => '4194428809',
+            'nome' => 'Jefferson',
+            'cpf' => '34555433831',
             'modulos' =>  json_encode(['usuarios', 'configuracao_rotulos', 'edicao', 'impressao']),
             'tipo_usuario' => 'administrador',
             'ativo' => true,

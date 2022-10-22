@@ -16,16 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/greeting', function () {
-    return 'Hello World';
-});
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/rotulos', [RotuloController::class, 'getRotulos']);
 Route::get('/pdf', [RotuloController::class, 'getPDF']);
-
-Route::get('/auth', [AuthController::class, 'getUser']);
