@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Codedge\Fpdf\Fpdf\Fpdf;
+use setasign\FPDI;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class RotuloController extends Controller
 {
+    protected $fpdf;
+
+    public function __construct()
+    {
+        $this->fpdf = new Fpdf;
+    }
 
     public function getProfile()
     {
@@ -14,7 +24,6 @@ class RotuloController extends Controller
 
     public function getRotulos(Request $request)
     {
-        //Resquest example FILIAL_O=1&REQUI_NRO=820460&REQUI_SERIE=0
         date_default_timezone_set('America/Sao_Paulo');
 
         $filial = $request->input('FILIAL_O');
@@ -30,7 +39,7 @@ class RotuloController extends Controller
         return response($xmlConverted);
     }
 
-    public function getPDF(Request $request)
+    public function getAnexos(Request $request)
     {
         date_default_timezone_set('America/Sao_Paulo');
 
@@ -53,7 +62,16 @@ class RotuloController extends Controller
 
         $xmlIMG = json_encode(simplexml_load_file('http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v2.php?' . $parametros));
         $xmlIMGConverted = json_decode($xmlIMG, true);
-        // dd($xmlIMGConverted);
         return response($xmlIMGConverted);
+    }
+
+    public function makePDF(Request $request)
+    {
+        $nroPedido = $request->input('nroPedido');
+        $texto = 'JULIO';
+        $pdf = Pdf::loadView('pdf', compact('texto'),);
+        $customPaper = array(0, 0, 400, 200);
+
+        return $pdf->setPaper($customPaper)->stream('teste.pdf');
     }
 }

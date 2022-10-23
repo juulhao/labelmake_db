@@ -10,5 +10,6 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register.api');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout.api');
     Route::post('/rotulos', [RotuloController::class, 'getRotulos']);
-    Route::post('/pdf', [RotuloController::class, 'getPDF']);
+    Route::post('/anexos', [RotuloController::class, 'getAnexos']);
+    Route::post('/pdf', [RotuloController::class, 'makePDF']);
 });
