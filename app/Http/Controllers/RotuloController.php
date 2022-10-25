@@ -7,6 +7,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 use setasign\FPDI;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+use App\Models\Rotule;
 
 class RotuloController extends Controller
 {
@@ -73,5 +74,18 @@ class RotuloController extends Controller
         $customPaper = array(0, 0, 400, 200);
 
         return $pdf->setPaper($customPaper)->stream('teste.pdf');
+    }
+
+    public function createRotulo(Request $request)
+    {
+        $request->validate([
+            'nro_requisicao' => 'required',
+            'formula' => 'required',
+            'posologia' => 'required'
+        ]);
+
+        Rotule::create($request->all());
+
+        return response('Rótulo criado com sucesso');
     }
 }

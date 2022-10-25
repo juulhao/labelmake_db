@@ -12,4 +12,5 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
     Route::post('/rotulos', [RotuloController::class, 'getRotulos']);
     Route::post('/anexos', [RotuloController::class, 'getAnexos']);
     Route::post('/pdf', [RotuloController::class, 'makePDF']);
+    Route::post('/create-rotulo', [RotuloController::class, 'createRotulo']);
 });

@@ -12,11 +12,8 @@ class Rotule extends Model
     protected $table = 'rotules';
 
     protected $fillable = [
-        'nome',
-        'cpf',
-        'password',
-        'tipo_usuario',
-        'filial',
-        'ativo',
+        'nro_requisicao',
+        'posologia',
+        'formula',
     ];
 }

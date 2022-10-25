@@ -12,9 +12,6 @@
     <h1>Produto</h1>
     <h2> Nome do paciente {{$texto}}</h2>
     <strong>Nome da dtra</strong>
-
-    
-
 </body>
 
 </html>
