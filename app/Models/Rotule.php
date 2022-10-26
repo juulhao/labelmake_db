@@ -16,4 +16,9 @@ class Rotule extends Model
         'posologia',
         'formula',
     ];
+
+    protected $casts = [
+        'posologia' => 'array',
+        'formula' => 'array'
+    ];
 }

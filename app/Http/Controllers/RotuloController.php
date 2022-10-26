@@ -84,6 +84,8 @@ class RotuloController extends Controller
             'posologia' => 'required'
         ]);
 
+        //dd($request);
+
         Rotule::create($request->all());
 
         return response('Rótulo criado com sucesso');

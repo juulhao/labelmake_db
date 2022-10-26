@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('rotules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('nome');
-            $table->string('tipo');
+            $table->string('nro_requisicao');
+            $table->longText('formula');
+            $table->longText('posologia');
             $table->timestamps();
         });
     }
@@ -29,6 +29,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rotules');
+        Schema::table('rotules', function (Blueprint $table) {
+            $table->dropColumn('nro_requisicao');
+            $table->dropColumn('posologia');
+            $table->dropColumn('formula');
+        });
     }
 };
