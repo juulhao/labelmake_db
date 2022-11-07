@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "e9059024-a481-49e7-9031-4dd7b5d1f79e",
+		"name": "LabelMakerDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RECUPERAR ROTULOS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"FILIAL_O\": \"0011\",\n    \"REQUI_NRO\": \"050211\",\n    \"REQUI_SERIE\": \"0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/rotulos",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"rotulos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cpf",
+							"value": "1928319283",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "171255pt",
+							"type": "default"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "171255pt",
+							"type": "default",
+							"disabled": true
+						},
+						{
+							"key": "cpf",
+							"value": "41944258809",
+							"type": "default",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RECUPERAR ANEXOS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"FILIAL_O\": \"0011\",\n    \"REQUI_NRO\": \"050211\",\n    \"REQUI_SERIE\": \"0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/anexos",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"anexos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CRIAR USUÁRIOS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Julio",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "juulhao@gmail.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "171255pt",
+							"type": "default"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "171255pt",
+							"type": "default"
+						},
+						{
+							"key": "cpf",
+							"value": "41944258809",
+							"type": "default"
+						},
+						{
+							"key": "modulos",
+							"value": "[\"usuarios\", \"configuracao_rotulos\", \"edicao\", \"impressao\"]",
+							"type": "default"
+						},
+						{
+							"key": "tipo_usuario",
+							"value": "admin",
+							"type": "default"
+						},
+						{
+							"key": "filial",
+							"value": "2",
+							"type": "default"
+						},
+						{
+							"key": "ativo",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE ROTULES",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nro_requisicao\":\"0011-050206-0\",\"posologia\":[\"CONSUMIR 1 SACHE AO DIA.\",\"CONSUMIR 1 SACHE AO DIA.\",\"CONSUMIR 1 SACHE AO DIA.\",\"CONSUMIR 1 SACHE AO DIA.\"],\"formula\":[\"LACTOBACILLUS LACTIS\",\"LACTOBACILLUS GASSERI\",\"LACTOBACILLUS RHAMINOSUS\",\"LACTOBACILLUS PARACASEI\",\"BIFIDOBACTERIUM BREVE\",\"BIFIDOBACTERIUM ANIMALIS/LACTIS\",\"BIFIDOBACTERIUM BIFIDUM\",\"SACCHAROMYCES BOULARDII\",\"GOMA GUAR\",\"FIBREGUM B\",\"LACTOBACILLUS LACTIS\",\"LACTOBACILLUS GASSERI\",\"LACTOBACILLUS RHAMINOSUS\",\"LACTOBACILLUS PARACASEI\",\"BIFIDOBACTERIUM BREVE\",\"BIFIDOBACTERIUM ANIMALIS/LACTIS\",\"BIFIDOBACTERIUM BIFIDUM\",\"SACCHAROMYCES BOULARDII\",\"GOMA GUAR\",\"FIBREGUM B\",\"LACTOBACILLUS LACTIS\",\"LACTOBACILLUS GASSERI\",\"LACTOBACILLUS RHAMINOSUS\",\"LACTOBACILLUS PARACASEI\",\"BIFIDOBACTERIUM BREVE\",\"BIFIDOBACTERIUM ANIMALIS/LACTIS\",\"BIFIDOBACTERIUM BIFIDUM\",\"SACCHAROMYCES BOULARDII\",\"GOMA GUAR\",\"FIBREGUM B\",\"LACTOBACILLUS LACTIS\",\"LACTOBACILLUS GASSERI\",\"LACTOBACILLUS RHAMINOSUS\",\"LACTOBACILLUS PARACASEI\",\"BIFIDOBACTERIUM BREVE\",\"BIFIDOBACTERIUM ANIMALIS/LACTIS\",\"BIFIDOBACTERIUM BIFIDUM\",\"SACCHAROMYCES BOULARDII\",\"GOMA GUAR\",\"FIBREGUM B\"]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/create-rotulo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"create-rotulo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CRIAR PDF",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/pdf/?nroPedido=0011-050206-0&template=AF_B5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pdf",
+						""
+					],
+					"query": [
+						{
+							"key": "nroPedido",
+							"value": "0011-050206-0"
+						},
+						{
+							"key": "template",
+							"value": "AF_B5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
