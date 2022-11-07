@@ -23,6 +23,9 @@ class RotuloController extends Controller
         return view('users');
     }
 
+    /*
+        Busca os rótulos na webservice do cliente e retorna um JSON para o frontend consumir.
+    */
     public function getRotulos(Request $request)
     {
         date_default_timezone_set('America/Sao_Paulo');
@@ -31,15 +34,18 @@ class RotuloController extends Controller
         $reqNro = $request->input('REQUI_NRO');
         $reqSerie = $request->input('REQUI_SERIE');
 
-        $myAddress = '187.22.222.19';
+        $myAddress = '187.22.222.19'; // Este endereço precisa ser o mesmo do IP da sua máquina
+
         $key = md5("ProjetoRotulo") . '@|@' . md5($myAddress) . '@|@' . md5(date('Ymd'));
         $parametros = 'KEY=' . $key . '&webBUSCA=' . 'REQsD' . '&' . 'FILIAL_O=' . $filial . '&REQUI_NRO=' . $reqNro . '&REQUI_SERIE=' . $reqSerie;
-        $url = "http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v4.php?${parametros}";
+        $url = "http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v2.php?${parametros}";
         $xml = json_encode(simplexml_load_file($url));
         $xmlConverted = json_decode($xml, true);
         return response($xmlConverted);
     }
-
+    /*
+        Busca pelos anexos (Imagens) nos objetos fornecidos pela webservice
+    */
     public function getAnexos(Request $request)
     {
         date_default_timezone_set('America/Sao_Paulo');
@@ -48,11 +54,11 @@ class RotuloController extends Controller
         $reqNro = $request->input('REQUI_NRO');
         $reqSerie = $request->input('REQUI_SERIE');
 
-        $myAddress = '187.22.222.19';
+        $myAddress = '187.22.222.19'; // Este endereço precisa ser o mesmo do IP da sua máquina
         $key = md5("ProjetoRotulo") . '@|@' . md5($myAddress) . '@|@' . md5(date("Ymd"));
         $parametros2 = 'KEY=' . $key . '&webBUSCA=' . 'REQsD' . '&' . 'FILIAL_O=' . $filial . '&REQUI_NRO=' . $reqNro . '&REQUI_SERIE=' . $reqSerie;
 
-        $xml = json_encode(simplexml_load_file('http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v4.php?' . $parametros2));
+        $xml = json_encode(simplexml_load_file('http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v2.php?' . $parametros2));
         $xmlConverted = json_decode($xml, true);
 
         $parametros =     'KEY=' . $key .
@@ -61,15 +67,17 @@ class RotuloController extends Controller
             '&PEDIDO_NRO=' . ltrim(rtrim($xmlConverted['RECNO1']['NRO_PEDIDO_MOBY'])) .
             '&SESS=afg1234567890';
 
-        $xmlIMG = json_encode(simplexml_load_file('http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v4.php?' . $parametros));
+        $xmlIMG = json_encode(simplexml_load_file('http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v2.php?' . $parametros));
         $xmlIMGConverted = json_decode($xmlIMG, true);
         return response($xmlIMGConverted);
     }
-
+    /*
+        Busca na tabela `rotules`, pelas colunas `posologia` e `formula`, depois retorna estes arrays de strings juntamente com os outros dados da webservice, para no final montar um PDF dinamicamente de acordo com o template fornecido
+    */
     public function makePDF(Request $request)
     {
-        $nroPedido = $request->input('nroPedido');
-        $template = $request->input('template');
+        $nroPedido = $request->input('nroPedido'); // Busca o nroPedido como parâmetro da URL
+        $template = $request->input('template'); // Busca o template como parâmetro da URL
 
         date_default_timezone_set('America/Sao_Paulo');
 
@@ -77,13 +85,14 @@ class RotuloController extends Controller
         $reqNro = substr($nroPedido, 5, 6);
         $reqSerie = $nroPedido[12];
 
-        $myAddress = '187.22.222.19';
+        $myAddress = '187.22.222.19'; // Deve ser o mesmo ip da sua máquina
         $key = md5("ProjetoRotulo") . '@|@' . md5($myAddress) . '@|@' . md5(date('Ymd'));
         $parametros = 'KEY=' . $key . '&webBUSCA=' . 'REQsD' . '&' . 'FILIAL_O=' . $filial . '&REQUI_NRO=' . $reqNro . '&REQUI_SERIE=' . $reqSerie;
-        $url = "http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v4.php?${parametros}";
+        $url = "http://ias3.hospedagemdesites.ws/ws.rotulos/api/wBuscaMooca.v2.php?${parametros}";
         $xml = json_encode(simplexml_load_file($url));
         $xmlConverted = json_decode($xml, true);
 
+        // Todos estes campos representam as linhas do PDF
         $nomeDoPaciente = $xmlConverted['RECNO1']['NOME_CLIENTE'];
         $nomeProduto = $xmlConverted['RECNO1']['DESCR_PRODUTO'];
         $validadeProduto = $xmlConverted['RECNO1']['DATA_VALIDADE_PRODUCAO'];
@@ -101,6 +110,8 @@ class RotuloController extends Controller
         $telefoneFilial = $xmlConverted['RECNO1']['FILIAL_ESTOQUE_TELEFONE'];
         $formulas = Rotule::where('nro_requisicao', $nroPedido)->orderBy('id', 'desc')->value('formula');
         $posologias = Rotule::where('nro_requisicao', $nroPedido)->orderBy('id', 'desc')->value('posologia');
+
+        // O array que é enviado para o Blade View renderizar o PDF
         $data = [
             'nomePaciente'    => $nomeDoPaciente,
             'nomeProduto' => $nomeProduto,
@@ -120,12 +131,11 @@ class RotuloController extends Controller
             'formulas' => $formulas,
             'posologias' => $posologias
         ];
-
-        //dd($template);
-        $pdf = PDF::loadView('Bisnagas/' . $template, $data);
-        return $pdf->stream('result.pdf');
+        $pdf = PDF::loadView('Bisnagas/' . $template, $data); // $template = é o nome do arquivo na pasta `resources/Bisnagas/AF_B1.blade.php` este nome é enviado pelo frontend da aplicação
+        return $pdf->stream('result.pdf'); // cria dinamicamente o pdf
     }
 
+    // este método cria os rotulos editados pelo frontend e salva na tabela rotules
     public function createRotulo(Request $request)
     {
         $request->validate([

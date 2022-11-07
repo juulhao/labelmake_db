@@ -7,10 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['cors', 'json.response']], function () {
     Route::get('/health-check', function () {
-        //dd(date("Ymd"));
-        $key = md5("ProjetoRotulo") . '@|@' . md5('187.22.222.19') . '@|@' . md5(date("Ymd"));
-        // dd($key);
-        dd($_SERVER['SERVER_ADDR']);
         return response('Is alive');
     });
     Route::post('/login', [AuthController::class, 'login'])->name('login.api');
