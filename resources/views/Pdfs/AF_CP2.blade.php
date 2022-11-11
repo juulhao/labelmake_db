@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 		<style>
 			body{
-				background: url(img/bg-AF_CP3.svg) no-repeat;
+				background: url(https://delphus7.com.br/images/bg-AF_CP3.png) no-repeat;
 				/*background-size: 158mm 70mm;*/
 				font-family: 'Asap', sans-serif;
 				height: 70mm;
@@ -64,34 +64,42 @@
 			<div class="parte-roxa">
 				<div class="parte-um">
 					<p>Farmacêutica Resp.:</p>
-					<p style="margin-bottom: 1mm;">Daniela Carnavale - CRF 32405</p>
+					<p style="margin-bottom: 1mm;">{{$farmaceutica}} - CRF {{$farmaceuticaCRF}}</p>
 					<p>Fabricado por:</p>
 					<p>MPH Farmácia de Manipulação </p>
-					<p>Av. Paes de Barros - 1499</p>
-					<p>Mooca - CEP 03115 001</p>
-					<p>CNPJ 38405351/0001-55</p>
-					<p>Tel. 11 2028 1844</p>
+					<p>{{$enderecoRotulo}}</p>
+					<p>CNPJ {{$cnpjFILIAL}}</p>
+					<p>Tel. {{$DDDFilial}} {{$telefoneFilial}}</p>
 				</div>
 				<div class="site texto-laranja">
 					<p>saiba mais em:</p>
 					<p>www.idmantecorp.com.br</p>
 				</div>
 				<div class="parte-dois">
-					<p>Req.: 000000000</p>
-					<p>Reg.: 000000000</p>
-					<p>Fab.: 00/00/00</p>
-					<p>Val.: 00/00/00</p>
+					<p>Req.: {{$reqProduto}}</p>
+					<p>Reg.: {{$regProduto}}</p>
+					<p>Fab.: {{$dataFabricao}}</p>
+					<p>Val.: {{$validadeProduto}}</p>
 				</div>
 			</div>
 			<div class="parte-branca">
-				<h1 class="texto-roxo">PRODUTO</h1>
-				<h2 class="texto-roxo">Nome do Paciente</h2>
-				<h2 class="texto-laranja">Dr. Nome do Médico</h2>
-				<h2 class="texto-laranja">CRM: XXXXX</h2>
-				<p style="margin-top: 3mm;"><span class="texto-laranja">COMPOSIÇÃO:</span> LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR
-				INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, EST</p>
-				<p><span class="texto-laranja">POSOLOGIA:</span> LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT</p>
-				<p><span class="texto-laranja">CONTÉM:</span> LOREM IPSUM DOLOR SIT,</p>
+				<h1 class="texto-roxo">{{$nomeProduto}}</h1>
+				<h2 class="texto-roxo">{{$nomePaciente}}</h2>
+				<h2 class="texto-laranja">{{$nomeDoutor}}</h2>
+				<h2 class="texto-laranja">CRM: {{$crmDoutor}}</h2>
+				<p style="margin-top: 3mm;"><span class="texto-laranja">COMPOSIÇÃO:</span>
+					@foreach ($formulas as $user)
+  							{{ $user }}
+  						@endforeach
+				</p>
+				<p><span class="texto-laranja">POSOLOGIA:</span> 
+					@foreach ($posologias as $user)
+  							{{ $user }}
+  						@endforeach
+				</p>
+				<p><span class="texto-laranja">CONTÉM:</span> 
+					{{$contem}}
+				</p>
 			</div>
 		</div>
 	</body>

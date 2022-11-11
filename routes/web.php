@@ -18,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/rotulos', [RotuloController::class, 'getRotulos']);
 Route::get('/pdf', [RotuloController::class, 'getPDF']);
+
+Route::get('/pdfteste', function () {
+    return view('Bisnagas/AF_B5.template');
+});

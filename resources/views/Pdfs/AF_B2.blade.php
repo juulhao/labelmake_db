@@ -115,39 +115,51 @@
 		</style>
 	</head>	
 	<body>
-		<img src="https://delphus7.com.br/images/AF_B2.png" />
-		<div class="espacamento">
+		<img src="https://delphus7.com.br/images/AF_B2.png" alt="tag">
+
+		<div class="espacamento" style="padding-top:0mm">
 			<div class="parte-branca">
-				<div class="parte-branca-um"> 
-					<h1 class="texto-roxo">PRODUTO</h1>
+				<div class="parte-branca-um" style="margin-bottom: 5mm; margin-top: -3mm">
+					<h1 class="texto-roxo">{{$nomeProduto}}</h1>
 				</div>
-				<div class="parte-branca-dois"> 
-					<h2 class="texto-roxo">Nome do Paciente</h2>
-					<h2 class="texto-laranja">Dr. Nome do Médico</h2>
-					<h2 class="texto-laranja">CRM: XXXXX</h2>
+				<div class="parte-branca-dois" style="margin-top: 5mm;">
+					<h2 class="texto-roxo">{{$nomePaciente}}</h2>
+					<h2 class="texto-laranja">{{$nomeDoutor}}</h2>
+					<h2 class="texto-laranja">CRM: {{$crmDoutor}}</h2>
 				</div>
-				<div class="parte-branca-tres"> 
-					<p style="margin-top: 1mm;"><span class="texto-laranja">COMPOSIÇÃO:</span> LOREM IPSUM DOLOR SIT AMET</p>
-					<p><span class="texto-laranja">POSOLOGIA:</span> LOREM IPSUM DOLOR SIT AMET</p>
-					<p><span class="texto-laranja">CONTÉM:</span> LOREM IPSUM DOLOR SIT,</p>
-				</div>
-				<div class="site texto-laranja">
-					<p>saiba mais em:</p>
-					<p>www.idmantecorp.com.br</p>
+				<div class="parte-branca-tres">
+					<p style="margin-top: 1mm;">
+						<span class="texto-laranja">COMPOSIÇÃO:</span>
+						@foreach ($formulas as $user)
+							{{ $user }}
+						@endforeach
+					</p>
+					<p>
+						<span class="texto-laranja">POSOLOGIA:</span>
+						@foreach ($posologias as $user)
+							{{ $user }}
+						@endforeach
+					</p>
+					<p><span class="texto-laranja">CONTÉM:</span> {{$contem}}</p>
 				</div>
 				<div class="parte-dois">
-					<div style="width: 50%;float: left ;">
-						<p>Fab.: 00/00/00</p>
-						<p>Val.: 00/00/00</p>
-						<p>Req.: 000000000</p>
-						<p>Reg.: 000000000</p>
+					<div style="text-align: right">
+						<p>Req.: {{$reqProduto}}</p>
+						<p>Reg.: {{$regProduto}}</p>
+						<p>Fab.: {{$dataFabricao}}</p>
+						<p>Val.: {{$validadeProduto}}</p>
 					</div>
 				</div>
+
 				<div class="parte-um">
-					<p>Farmacêutica Resp. Daniela Carnavale - CRF 32405</p>
+					<p>Farmacêutica Resp. {{$farmaceutica}} - CRF {{$farmaceuticaCRF}}</p>
 					<p>Fabricado por: MPH Farmácia de Manipulação</p>
-					<p>Av. Paes de Barros 1499 - Mooca - CEP 03115 001</p>
-					<p>CNPJ 38405351/0001-55 - Tel. 11 2028 1844</p>
+					<p>{{$enderecoRotulo}}</p>
+					<p>CNPJ {{$cnpjFILIAL}} - Tel. {{$DDDFilial}} {{$telefoneFilial}}</p>
+				</div>
+				<div class="site texto-laranja"  style="margin-top: 5px;">
+					<p>saiba mais em:</p>
+					<p>www.idmantecorp.com.br</p>
 				</div>
 			</div>
 		</div>

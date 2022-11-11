@@ -131,7 +131,7 @@ class RotuloController extends Controller
             'formulas' => $formulas,
             'posologias' => $posologias
         ];
-        $pdf = PDF::loadView('Bisnagas/' . $template, $data); // $template = é o nome do arquivo na pasta `resources/Bisnagas/AF_B1.blade.php` este nome é enviado pelo frontend da aplicação
+        $pdf = PDF::loadView('Pdfs/' . $template, $data); // $template = é o nome do arquivo na pasta `resources/Bisnagas/AF_B1.blade.php` este nome é enviado pelo frontend da aplicação
         return $pdf->stream('result.pdf'); // cria dinamicamente o pdf
     }
 

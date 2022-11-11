@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 		<style>
 			body{
-				background: url(img/AF_AIR1.svg) no-repeat;
+				background: url(https://delphus7.com.br/images/AF_AIR1.png) no-repeat;
 				/* background-size: 140mm 40mm; */
 				font-family: 'Asap', sans-serif;
 				height: 70mm;
@@ -78,33 +78,41 @@
 			</div>
 			<div class="parte-branca">
 				<div class="texto-girado">
-					<h1 class="texto-roxo">PRODUTO</h1>
-					<h2 class="texto-roxo">Nome do Paciente</h2>
-					<h2 class="texto-laranja">Dr. Nome do Médico</h2>
-					<h2 class="texto-laranja">CRM: XXXXX</h2>
+					<h1 class="texto-roxo">{{$nomeProduto}}</h1>
+					<h2 class="texto-roxo">{{$nomePaciente}}</h2>
+					<h2 class="texto-laranja">{{$nomeDoutor}}</h2>
+					<h2 class="texto-laranja">CRM: {{$crmDoutor}}</h2>
 				</div>
 				<div class="texto-normal">
-					<p style="margin-top: 0mm;"><span class="texto-laranja">COMPOSIÇÃO:</span> LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR
-					INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, EST</p>
-					<p><span class="texto-laranja">POSOLOGIA:</span> LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT</p>
-					<p><span class="texto-laranja">CONTÉM:</span> LOREM IPSUM DOLOR SIT,</p>
+					<p style="margin-top: 0mm;"><span class="texto-laranja">COMPOSIÇÃO:</span> 
+						@foreach ($formulas as $user)
+						{{ $user }}
+					@endforeach
+					</p>
+					<p>
+						<span class="texto-laranja">POSOLOGIA:</span>
+						@foreach ($posologias as $user)
+							{{ $user }}
+						@endforeach
+					</p>
+					<p><span class="texto-laranja">CONTÉM:</span> {{$contem}}</p>
 					<div style="width: 70%;float: left;margin-top: 2mm;margin-left: -5mm;">
-						<p>Req.: 000000000</p>
-						<p>Reg.: 000000000</p>
+						<p>Req.: {{$reqProduto}}</p>
+						<p>Reg.: {{$regProduto}}</p>
 					</div>
 					<div style="width: 50%;float: left;margin-top: 2mm;">
-						<p>Fab.: 00/00/00</p>
-						<p>Val.: 00/00/00</p>
+						<p>Fab.: {{$dataFabricao}}</p>
+						<p>Val.: {{$validadeProduto}}</p>
 					</div>
 					<div class="site texto-laranja" style="    margin-top: 9mm; margin-right: 10mm; margin-left: -8mm;>
-						<b style="color: #f16d00;">saiba mais em:</b>
+						<b style="color: #f16d00">saiba mais em:</b>
 						<b style="color: #f16d00">www.idmantecorp.com.br</b>
 					</div>
 					<div class="parte-um" style="margin-left: -15mm; margin-top: 5mm;">
-						<p>Farmacêutica Resp.: Daniela Carnavale - CRF 32405</p>
+						<p>Farmacêutica Resp. {{$farmaceutica}} - CRF {{$farmaceuticaCRF}}</p>
 						<p>Fabricado por: MPH Farmácia de Manipulação</p>
-						<p>Av. Paes de Barros 1499 - Mooca - CEP 03115 001</p>
-						<p>CNPJ 38405351/0001-55 - Tel. 11 2028 1844</p>
+						<p>{{$enderecoRotulo}}</p>
+						<p>CNPJ {{$cnpjFILIAL}} - Tel. {{$DDDFilial}} {{$telefoneFilial}}</p>
 					</div>
 				<div>
 			</div>

@@ -1,16 +1,22 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>AF_B4 - 40 x 90mm_ID_Rotulos_Bisnagas</title>
+		<title>AF_B5 - 40 x 110mm_ID_Rotulos_Bisnagas</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 		<style>
+                @page {
+                    margin: 0;
+                }
+			    @page { size: 4cm 26cm portrait; }
+
 			@media print {
-				.pagebreak { page-break-before: always; } /* page-break-after works, as well */
+				
+				.pagebreak { page-break-before: avoid; } /* page-break-after works, as well */
 			}
 			body{
 				/* background-size: 200mm 25mm; */
 				font-family: 'Asap', sans-serif;
-				height: 90mm;
+				height: 110mm;
 				margin: 0mm;
 				width: 40mm;
 			}
@@ -22,14 +28,14 @@
 			}
 			img {
 				width: 40mm;
-				height: 90mm;
+				height: 110mm;
 			}
 			p{
 				margin: 0mm;
 			}
 			.espacamento{
 				padding: 2mm;
-				height: 90mm;
+				height: 110mm;
 				width: 36mm;
 			}
 			.texto-laranja{
@@ -106,7 +112,7 @@
 				margin: 0mm;
 			}
 			.parte-dois p{
-				font-size: 1.3mm;
+				font-size: 2mm;
 			}
 			.parte-um p{
 			    font-size: 1.5mm;
@@ -116,46 +122,59 @@
 				font-weight: 600;
 				margin: 0mm;
 				font-size: 2mm;
-				text-align: right;
+				text-align: left;
+			}
+			.parte-branca h2.texto-laranja{
+				margin-top: 4mm;
 			}
 		</style>
 	</head>	
 	<body>
-		<img src="https://delphus7.com.br/images/AF_B4.png" />
+		<img src="https://delphus7.com.br/images/AF_B5.png" alt="tag">
+
 		<div class="espacamento">
 			<div class="parte-branca">
-				<div class="parte-branca-um"> 
-					<h1 class="texto-roxo">PRODUTO</h1>
+				<div class="parte-branca-um" style="margin-bottom: 12mm;">
+					<h1 class="texto-roxo">{{$nomeProduto}}</h1>
 				</div>
-				<div class="parte-branca-dois"> 
-					<h2 class="texto-roxo">Nome do Paciente</h2>
-					<h2 class="texto-laranja">Dr. Nome do Médico</h2>
-					<h2 class="texto-laranja">CRM: XXXXX</h2>
+				<div class="parte-branca-dois" style="margin-top: 12mm;"> 
+					<h2 class="texto-roxo">{{$nomePaciente}}</h2>
+					<h2 class="texto-laranja">{{$nomeDoutor}}</h2>
+					<h2 class="texto-laranja">CRM: {{$crmDoutor}}</h2>
 				</div>
 				<div class="parte-branca-tres"> 
-					<p style="margin-top: 1mm;"><span class="texto-laranja">COMPOSIÇÃO:</span> LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, EST</p>
-					<p><span class="texto-laranja">POSOLOGIA:</span>  LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT</p>
-					<p><span class="texto-laranja">CONTÉM:</span> LOREM IPSUM DOLOR SIT,</p>
+					<p style="margin-top: 1mm;">
+						<span class="texto-laranja">COMPOSIÇÃO:</span> 
+						@foreach ($formulas as $user)
+							{{ $user }}
+						@endforeach
+					</p>
+					<p>
+						<span class="texto-laranja">POSOLOGIA:</span> 
+						@foreach ($posologias as $user)
+							{{ $user }}
+						@endforeach
+					</p>
+					<p><span class="texto-laranja">CONTÉM:</span> {{$contem}}</p>
 				</div>
-				<div class="site texto-laranja">
+				<div class="parte-dois">
+					<div style="text-align: right">
+						<p>Req.: {{$reqProduto}}</p>
+						<p>Reg.: {{$regProduto}}</p>
+						<p>Fab.: {{$dataFabricao}}</p>
+						<p>Val.: {{$validadeProduto}}</p>
+					</div>
+				</div>
+			
+				<div class="parte-um">
+					<p>Farmacêutica Resp. {{$farmaceutica}} - CRF {{$farmaceuticaCRF}}</p>
+					<p>Fabricado por: MPH Farmácia de Manipulação</p>
+					<p>{{$enderecoRotulo}}</p>
+					<p>CNPJ {{$cnpjFILIAL}} - Tel. {{$DDDFilial}} {{$telefoneFilial}}</p>
+				</div>
+				<div class="site texto-laranja"  style="margin-top: 5px;">
 					<p>saiba mais em:</p>
 					<p>www.idmantecorp.com.br</p>
-				</div>
-				<div class="parte-dois" style="width: 60%;float: left; margin-top: 2mm;">
-					<div style="width: 50%;float: right;">
-						<p>Fab.: 00/00/00</p>
-						<p>Val.: 00/00/00</p>
-					</div>
-					<div style="width: 50%;float: left;">
-						<p>Req.: 000000000</p>
-						<p>Reg.: 000000000</p>
-					</div>
-				</div>
-				<div class="parte-um">
-					<p>Farmacêutica Resp. Daniela Carnavale - CRF 32405</p>
-					<p>Fabricado por: MPH Farmácia de Manipulação</p>
-					<p>Av. Paes de Barros 1499 - Mooca - CEP 03115 001</p>
-					<p>CNPJ 38405351/0001-55 - Tel. 11 2028 1844</p>
 				</div>
 			</div>
 		</div>

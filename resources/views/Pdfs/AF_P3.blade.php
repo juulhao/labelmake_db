@@ -1,22 +1,25 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>AF_P1 - 315 x 60mm_ID_Rotulos_Potes_OlimpicLacre</title>
+		<title>AF_P3 - 315 x 120mm_ID_Rotulos_Potes_OlimpicLacre</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 		<style>
 			body{
-				background: url(img/AF_P1.svg) no-repeat;
+				background: url(https://delphus7.com.br/images/AF_P3.png) no-repeat;
 				/* background-size: 200mm 25mm; */
 				font-family: 'Asap', sans-serif;
-				height: 60mm;
+				height: 120mm;
 				margin: 0px;
 				width: 315mm;
+			}
+			h1{
+				font-size: 4mm;
 			}
 			p{
 				margin: 0px;
 			}
 			.espacamento{
-				padding: 10mm 14.5mm;
+				padding: 34mm 21.5mm;
 			}
 			.texto-laranja{
 				color: #f16d00;
@@ -26,7 +29,7 @@
 			}
 			.parte-roxa{
 				color: #fff;
-				font-size: 1.5mm;
+				font-size: 1.7mm;
 				width: 37%;
 				float: left;
 			}
@@ -46,6 +49,7 @@
 				width: 55%;
 				float: left;
 				font-weight: 100;
+				margin-top: -6mm;
 			}
 			.parte-branca-um{
 				transform: rotate(270deg);
@@ -59,11 +63,13 @@
 				margin-left: 5mm;
 				transform: rotate(270deg);
 				text-align: right;
+				margin-top: -9mm;
 			}
 			.parte-branca-tres{
 				margin-top: -13mm;
 				float: left;
-				width: 72%;
+				width: 74%;
+				margin-top: -18mm;
 			}
 			.parte-branca h2{
 				margin: 0mm;
@@ -72,10 +78,11 @@
 				text-align: justify;
 				color: #611f7f;
 				margin-bottom: 1mm;
-				font-size: 1.7mm;
+				font-size: 2.3mm;
 			}
 			.parte-branca p span{
 				font-weight: 600;
+				font-size: 3mm;
 			}
 		</style>
 	</head>	
@@ -84,14 +91,13 @@
 			<div class="parte-roxa">
 				<div class="parte-um">
 					<p>Farmacêutica Resp.:</p>
-					<p>Daniela Carnavale</p>
-					<p style="margin-bottom: 1mm;">CRF 32405</p>
+					<p>{{$farmaceutica}}</p>
+					<p style="margin-bottom: 1mm;">CRF {{$farmaceuticaCRF}}</p>
 					<p>Fabricado por:</p>
 					<p>MPH Farmácia de Manipulação </p>
-					<p>Av. Paes de Barros - 1499</p>
-					<p>Mooca - CEP 03115 001</p>
-					<p>CNPJ 38405351/0001-55</p>
-					<p>Tel. 11 2028 1844</p>
+					<p>{{$enderecoRotulo}}</p>
+					<p>CNPJ {{$cnpjFILIAL}}</p>
+					<p>Tel. {{$DDDFilial}} {{$telefoneFilial}}</p>
 					<div class="site texto-laranja">
 						<p>saiba mais em:</p>
 						<p>www.idmantecorp.com.br</p>
@@ -100,27 +106,35 @@
 			</div>
 			<div class="parte-branca">
 				<div class="parte-branca-um"> 
-					<h1 class="texto-roxo">PRODUTO</h1>
+					<h1 class="texto-roxo">{{$nomeProduto}}</h1>
 				</div>
 				<div class="parte-branca-dois"> 
-					<h2 class="texto-roxo">Nome do Paciente</h2>
-					<h2 class="texto-laranja">Dr. Nome do Médico</h2>
-					<h2 class="texto-laranja">CRM: XXXXX</h2>
+					<h2 class="texto-roxo">{{$nomePaciente}}</h2>
+  					<h2 class="texto-laranja">{{$nomeDoutor}}</h2>
+  					<h2 class="texto-laranja">CRM: {{$crmDoutor}}</h2>
 				</div>
 				<div class="parte-branca-tres"> 
 					<p style="text-align: right;"><span class="texto-laranja">COMPOSIÇÃO:</span></p>
-					<p> LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT. DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR. EXCEPTEUR SINT OCCAECAT CUPIDATAT NON PROIDENT, SUNT IN CULPA QUI OFFICIA DESERUNT MOLLIT ANIM ID EST LABORUM.</p>
+					<p>
+						@foreach ($formulas as $user)
+						{{ $user }}
+						@endforeach
+					</p>
 					<p style="text-align: right;"><span class="texto-laranja">POSOLOGIA:</span></p>
-					<p>LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA</p>
+					<p>
+						@foreach ($posologias as $user)
+  							{{ $user }}
+  						@endforeach
+					</p>
 					<p style="text-align: right;"><span class="texto-laranja">CONTÉM:</span></p>
-					<p>LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA,</p>
+					<p>{{$contem}}</p>
 					<div class="parte-dois" style="float: right;margin-left: 12mm;">
-						<p>Fab.: 00/00/00</p>
-						<p>Val.: 00/00/00</p>
+						<p>Fab.: {{$dataFabricao}}</p>
+  						<p>Val.: {{$validadeProduto}}</p>
 					</div>
 					<div class="parte-dois" style="float: right;">
-						<p>Req.: 000000000</p>
-						<p>Reg.: 000000000</p>
+						<p>Req.: {{$reqProduto}}</p>
+  						<p>Reg.: {{$regProduto}}</p>
 					</div>
 				</div>
 			</div>
